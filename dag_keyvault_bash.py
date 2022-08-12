@@ -12,7 +12,8 @@ from azure.identity import DefaultAzureCredential
 
 def creds():
     credential = DefaultAzureCredential()
-    print(credential)
+    
+    print(vault_url)
 
 
 default_args = {
