@@ -5,6 +5,12 @@ from airflow.utils.dates import days_ago
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.utils.task_group import TaskGroup
+from airflow.providers.microsoft.azure.secrets.key_vault import AzureKeyVaultBackend
+
+
+
+variable = AzureKeyVaultBackend().get_variable(key='dummy')
+print(variable)
 
 default_args = {
     'owner': 'airflow',
@@ -26,10 +32,6 @@ with DAG(
     start_node: DummyOperator = DummyOperator(task_id="start")
 
     with TaskGroup("test_layer", tooltip="Test Azure Secrets Layer") as test_layer:
-        bash_test_node = \
-            BashOperator(
-                task_id="test_secrets_full",
-                bash_command="echo {{ var.value.airflow-variables-dummy }}")
 
         bash_test_node_2 = \
             BashOperator(
