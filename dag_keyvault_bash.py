@@ -13,8 +13,9 @@ from azure.identity import DefaultAzureCredential
 
 def creds():
     credential = DefaultAzureCredential()
-    AzureKeyVaultBackend()
-    print(vault_url)
+    x=AzureKeyVaultBackend()
+    xv=x.client()
+    print(xv)
 
 
 default_args = {
