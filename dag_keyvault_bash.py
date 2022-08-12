@@ -7,12 +7,13 @@ from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.utils.task_group import TaskGroup
 from airflow.providers.microsoft.azure.secrets.key_vault import AzureKeyVaultBackend
+from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 
 
 def creds():
     credential = DefaultAzureCredential()
-    
+    AzureKeyVaultBackend()
     print(vault_url)
 
 
