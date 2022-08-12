@@ -9,8 +9,9 @@ from airflow.providers.microsoft.azure.secrets.key_vault import AzureKeyVaultBac
 from azure.identity import DefaultAzureCredential
 
 
-credential = DefaultAzureCredential()
-print(credential)
+def creds():
+    credential = DefaultAzureCredential()
+    print(credential)
 
 
 default_args = {
@@ -33,7 +34,10 @@ with DAG(
     start_node: DummyOperator = DummyOperator(task_id="start")
 
     with TaskGroup("test_layer", tooltip="Test Azure Secrets Layer") as test_layer:
-
+    
+        bash_test_node_1 = \
+            PythonOperator(task_id='test-task', python_callable=creds, dag=dag) 
+        
         bash_test_node_2 = \
             BashOperator(
                 task_id="test_secrets_short",
