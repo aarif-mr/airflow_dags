@@ -8,9 +8,9 @@ from airflow.utils.task_group import TaskGroup
 from airflow.providers.microsoft.azure.secrets.key_vault import AzureKeyVaultBackend
 
 
+credential = DefaultAzureCredential()
+print(credential)
 
-variable = AzureKeyVaultBackend().get_variable(key='dummy')
-print(variable)
 
 default_args = {
     'owner': 'airflow',
